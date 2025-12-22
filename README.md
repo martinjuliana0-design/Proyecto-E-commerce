@@ -13,12 +13,12 @@ Generar insights accionables para la toma de decisiones comerciales y operativas
 -----
 
 ## Metodología de Análisis:
-⦁	El proyecto se desarrolló siguiendo una metodología estructurada de análisis de datos, orientada a la toma de decisiones de negocio.
-⦁	Comprensión del problema:Evaluar si la gestión de inventario acompaña la demanda real,Detectar posibles ineficiencias operativas (sobrestock o quiebres),Analizar el desempeño de los productos clave.
-⦁	Exploración y preparación de los datos:Validación de consistencia entre totales (SQL, Excel y Power BI),Identificación y corrección de errores en: Unidades vendidas, estados de ordenes, movimientos de inventarios.
-⦁	Cálculo de métricas y KPIs relacionados con ventas y movimientos de inventarios.
-⦁	Visualización de datos a través de un dashboard interactivo
-⦁	Propuestas de mejora en la gestión de inventario,Recomendaciones para optimizar ventas y rotación de productos,Identificación de oportunidades para análisis futuros y automatización
+*	El proyecto se desarrolló siguiendo una metodología estructurada de análisis de datos, orientada a la toma de decisiones de negocio.
+* Comprensión del problema:Evaluar si la gestión de inventario acompaña la demanda real,Detectar posibles ineficiencias operativas (sobrestock o quiebres),Analizar el desempeño de los productos clave.
+*	Exploración y preparación de los datos:Validación de consistencia entre totales (SQL, Excel y Power BI),Identificación y corrección de errores en: Unidades vendidas, estados de ordenes, movimientos de inventarios.
+*	Cálculo de métricas y KPIs relacionados con ventas y movimientos de inventarios.
+*	Visualización de datos a través de un dashboard interactivo
+* Propuestas de mejora en la gestión de inventario,Recomendaciones para optimizar ventas y rotación de productos,Identificación de oportunidades para análisis futuros y automatización
 
 ----
 
@@ -28,16 +28,16 @@ No todos los productos con más salidas de inventario generan mayor volumen de v
 ----
 
 ## Herramientas y tecnologías utilizadas:
-SQL Server Management Studio
-Power BI
+* SQL Server Management Studio
+* Power BI
 
 ----
 
 ## KPIs Analizados:
-Ventas Totales ($)
-Unidades Vendidas
-Unidades Vendidas Ejecutadas
-Salidas de Inventario por Ventas
+* Ventas Totales ($)
+* Unidades Vendidas
+* Unidades Vendidas Ejecutadas
+* Salidas de Inventario por Ventas
 
 -----
 
@@ -47,21 +47,21 @@ El análisis fue visualizado mediante un dashboard desarrollado en Power BI. A c
 -----
 
 ## Principales conclusiones del análisis:
-Las ventas muestran patrones de estacionalidad, con picos en determinados meses.
-Algunos productos presentan mayores salidas de inventario que unidades vendidas ejecutadas, lo que sugiere ajustes operativos o diferencias en los registros.
-El inventario, en general, acompaña la demanda, pero existen productos con riesgo de sobrestock.
-Impacto económico potencial
-Optimización del inventario puede reducir costos de almacenamiento.
-Mejor alineación entre ventas e inventario disminuye pérdidas por quiebre o sobrestock.
-Identificación de productos clave permite focalizar estrategias comerciales y promociones.
+* Las ventas muestran patrones de estacionalidad, con picos en determinados meses.
+* Algunos productos presentan mayores salidas de inventario que unidades vendidas ejecutadas, lo que sugiere ajustes operativos o diferencias en los registros.
+* El inventario, en general, acompaña la demanda, pero existen productos con riesgo de sobrestock.
+* Impacto económico potencial
+* Optimización del inventario puede reducir costos de almacenamiento.
+* Mejor alineación entre ventas e inventario disminuye pérdidas por quiebre o sobrestock.
+* Identificación de productos clave permite focalizar estrategias comerciales y promociones.
 
 ----
 
 ## Proyección y análisis a futuro:
-Incorporar niveles de stock y puntos de reposición.
-Analizar márgenes de ganancia por producto.
-Implementar alertas tempranas de quiebre de stock.
-Agregar análisis predictivo de demanda por estacionalidad.
+* Incorporar niveles de stock y puntos de reposición.
+* Analizar márgenes de ganancia por producto.
+* Implementar alertas tempranas de quiebre de stock.
+* Agregar análisis predictivo de demanda por estacionalidad.
 
 ----
 
