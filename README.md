@@ -66,13 +66,13 @@ El análisis fue visualizado mediante un dashboard desarrollado en Power BI. A c
 ----
 
 ## Rol y alcance:
-Rol: Analista de Datos
-Responsabilidades:
-Modelado de datos
-Limpieza y validación
-Creación de medidas DAX
-Diseño de dashboard
-Storytelling y conclusiones de negocio
+* Rol: Analista de Datos
+* Responsabilidades:
+  *Modelado de datos
+  *Limpieza y validación
+  *Creación de medidas DAX
+  *Diseño de dashboard
+  *Storytelling y conclusiones de negocio
 
 ----
 
