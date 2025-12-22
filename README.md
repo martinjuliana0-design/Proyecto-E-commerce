@@ -77,11 +77,11 @@ Storytelling y conclusiones de negocio
 ----
 
 ## Evaluación bajo metodología SMART:
-S (Specific): analizar ventas e inventario del e-commerce.
-M (Measurable): KPIs claros y cuantificables.
-A (Achievable): análisis realizado con datos reales y herramientas estándar.
-R (Relevant): impacto directo en decisiones comerciales y operativas.
-T (Time-bound): período definido 2023–2025.
+* S (Specific): analizar ventas e inventario del e-commerce.
+* M (Measurable): KPIs claros y cuantificables.
+* A (Achievable): análisis realizado con datos reales y herramientas estándar.
+* R (Relevant): impacto directo en decisiones comerciales y operativas.
+* T (Time-bound): período definido 2023–2025.
 
 ----
 
