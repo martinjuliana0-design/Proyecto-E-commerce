@@ -1,0 +1,152 @@
+Tabla de hechos de ventas
+SELECT
+  o.Ordenid,
+  o.FechaOrden AS fecha_orden,
+  d.ProductoID,
+  p.Nombre,
+  p.CategoriaID,
+  d.Cantidad AS cantidad_vendida,
+  d.PrecioUnitario AS precio_unitario,
+  d.Cantidad * d.PrecioUnitario AS ingreso
+FROM ORDENES o
+INNER JOIN DETALLE d
+  ON o.OrdenID = d.OrdenID
+INNER JOIN PRODUCTOS p
+  ON d.ProductoID = p.ProductoID
+WHERE o.estado = 'Entregado';
+
+
+SELECT DISTINCT estado
+FROM ORDENES;
+
+
+CREATE TABLE FACT_VENTAS (
+    OrdenID INT,
+    fecha_orden DATE,
+    ProductoID INT,
+    Nombre VARCHAR(255),
+    CategoriaID INT,
+    cantidad_vendida INT,
+    precio_unitario DECIMAL(10,2),
+    ingreso DECIMAL(12,2)
+);
+--SE MODIFICO LA TABLA DE HECHOS DE VENTAS, PARA AGREGARLE EL ESTADO DE LAS VENTAS--
+ALTER TABLE FACT_VENTAS
+ADD estado_orden VARCHAR(50);
+
+UPDATE fv
+SET fv.estado_orden = o.estado
+FROM FACT_VENTAS fv
+INNER JOIN ORDENES o
+  ON fv.OrdenID = o.OrdenID;
+
+Tabla de hechos de inventarios 
+
+SELECT
+  m.MovimientoID,
+  m.Fecha AS fecha_movimiento,
+  m.ProductoID,
+  p.Nombre AS NombreProducto,
+  m.TipoMovimiento,
+  m.Cantidad AS cantidad_movimiento
+FROM INV_MOV m
+INNER JOIN PRODUCTOS p
+  ON m.ProductoID = p.ProductoID;
+
+  CREATE TABLE FACT_INVENTARIO (
+    MovimientoID INT,
+    fecha_movimiento DATE,
+    ProductoID INT,
+    NombreProducto VARCHAR(255),
+    TipoMovimiento VARCHAR(50),
+    cantidad_movimiento INT
+);
+
+INSERT INTO FACT_INVENTARIO
+SELECT
+  m.MovimientoID,
+  m.Fecha AS fecha_movimiento,
+  m.ProductoID,
+  p.Nombre AS NombreProducto,
+  m.TipoMovimiento,
+  m.Cantidad AS cantidad_movimiento
+FROM INV_MOV m
+INNER JOIN PRODUCTOS p
+  ON m.ProductoID = p.ProductoID;
+--SE MODIFICO LA TABLA DE HECHOS DE INVENTERIO CON EL FIN DE AGREGARLE EL MOTIVO DE MOVIMIENTO DE INVENTARIO --
+
+ALTER TABLE FACT_INVENTARIO
+ADD Motivo VARCHAR(50);
+
+UPDATE fi
+SET fi.Motivo = im.Motivo
+FROM FACT_INVENTARIO fi
+INNER JOIN INV_MOV im
+    ON fi.MovimientoID = im.MovimientoID;
+
+--QUERY 1-- CUANTO VENDIO LA EMPRESA 
+SELECT
+  SUM(ingreso) AS ventas_totales,
+  SUM(cantidad_vendida) AS unidades_vendidas
+FROM FACT_VENTAS;
+---QUERY 2-- VENTAS POR AÑOS 
+SELECT
+  YEAR(fecha_orden) AS anio,
+  SUM(ingreso) AS ventas_totales
+FROM FACT_VENTAS
+GROUP BY YEAR(fecha_orden)
+ORDER BY anio;
+
+--QUERY 3-- VENTAS POR MES 
+SELECT
+  YEAR(fecha_orden) AS anio,
+  MONTH(fecha_orden) AS mes,
+  SUM(ingreso) AS ventas_mensuales
+FROM FACT_VENTAS
+GROUP BY YEAR(fecha_orden), MONTH(fecha_orden)
+ORDER BY anio, mes;
+
+---QUERY 4-- QUE PRODUCTOS GENERAN MAS VENTAS 
+SELECT TOP 10
+  Nombre,
+  SUM(cantidad_vendida) AS unidades_vendidas,
+  SUM(ingreso) AS ingreso_total
+FROM FACT_VENTAS
+GROUP BY Nombre
+ORDER BY ingreso_total DESC;
+
+--QUERY 5-- RIESGO DE STOCK 
+
+SELECT
+  v.Nombre,
+  SUM(v.cantidad_vendida) AS unidades_vendidas,
+  SUM(CASE 
+        WHEN i.TipoMovimiento = 'Entrada' THEN i.cantidad_movimiento
+        ELSE 0
+      END) AS entradas_inventario
+FROM FACT_VENTAS v
+LEFT JOIN FACT_INVENTARIO i
+  ON v.ProductoID = i.ProductoID
+GROUP BY v.Nombre
+ORDER BY unidades_vendidas DESC;
+
+--QUERY 6--MOVIMIENTOS DE INVENTARIOS POR PRODUCTOS 
+
+SELECT
+  NombreProducto,
+  SUM(ABS(cantidad_movimiento)) AS movimientos_totales
+FROM FACT_INVENTARIO
+GROUP BY NombreProducto
+ORDER BY movimientos_totales DESC;
+
+--QUERY 7--RELACION VENTAS VS INVENTARIO 
+
+SELECT
+  v.Nombre,
+  SUM(v.cantidad_vendida) AS unidades_vendidas,
+  SUM(ABS(i.cantidad_movimiento)) AS movimientos_inventario
+FROM FACT_VENTAS v
+LEFT JOIN FACT_INVENTARIO i
+  ON v.ProductoID = i.ProductoID
+GROUP BY v.Nombre
+ORDER BY unidades_vendidas DESC;
