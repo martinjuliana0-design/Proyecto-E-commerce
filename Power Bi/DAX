@@ -1,0 +1,41 @@
+# Medidas DAX
+
+# Unidades vendidas 
+Unidades Vendidas = SUM(FACT_VENTAS[cantidad_vendida])
+Ventas Totales = SUM(FACT_VENTAS[ingreso])
+
+  ----
+
+# Movimientos Inventario   
+Movimientos Inventario = 
+SUMX(
+    FACT_INVENTARIO,
+    ABS(FACT_INVENTARIO[cantidad_movimiento])
+)
+
+----
+
+# Entradas Inventario 
+Entradas Inventario = 
+CALCULATE (
+    SUM ( FACT_INVENTARIO[cantidad_movimiento] ),
+    FACT_INVENTARIO[TipoMovimiento] = "Entrada"
+)
+
+  ----
+  
+ # Salidas Inventario  
+  Salidas Inventario = 
+CALCULATE (
+    ABS ( SUM ( FACT_INVENTARIO[cantidad_movimiento] ) ),
+    FACT_INVENTARIO[TipoMovimiento] = "Salida"
+)
+
+----
+  
+# Unidades Vendidas Ejecutadas 
+Unidades Vendidas Ejecutadas = 
+CALCULATE (
+    SUM ( FACT_VENTAS[cantidad_vendida] ),
+    FACT_VENTAS[estado_orden] IN { "Entregado", "Enviado" }
+)
